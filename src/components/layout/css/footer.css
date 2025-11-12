@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+.footer {
+  background: linear-gradient(to right, #78350f, #92400e);
+  color: #fef3c7;
+  font-family: 'Inter', sans-serif;
+  border-top: 4px solid #fbbf24;
+  padding-top: 4rem;
+}
+
+/* === CONTENEDOR PRINCIPAL === */
+.footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+@media (min-width: 992px) {
+  .footer-container {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* === BRAND / INFORMACIÓN === */
+.footer-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.footer-title span {
+  color: #fcd34d;
+}
+
+.footer-subtitle {
+  color: #fde68a;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.footer-description {
+  font-size: 0.95rem;
+  color: #fde68a;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.footer-contact {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 1.5rem;
+}
+
+.footer-contact li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+  color: #fde68a;
+  font-size: 0.9rem;
+}
+
+.footer-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  color: #fbbf24;
+}
+
+/* === REDES SOCIALES === */
+.footer-socials {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #fbbf24;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* === ENLACES RÁPIDOS === */
+.footer-links h3 {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: #fde68a;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #fff;
+}
+
+/* === COPYRIGHT === */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  color: #fcd34d;
+}
+
+.footer-bottom span {
+  color: #fff;
+  font-weight: 600;
+}

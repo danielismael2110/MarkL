@@ -1,3 +1,29 @@
+/* Variables CSS para temas - Aplicadas al contenedor principal */
+.producto-grid-container {
+  /* Variables para tema claro (por defecto) */
+  --grid-bg-primary: #ffffff;
+  --grid-bg-secondary: #f8fafc;
+  --grid-text-primary: #1e293b;
+  --grid-text-secondary: #6b7280;
+  --grid-text-muted: #9ca3af;
+  --grid-accent: #059669;
+  --grid-border: #e5e7eb;
+  --grid-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Tema oscuro aplicado al contenedor principal */
+.dark-theme .producto-grid-container {
+  --grid-bg-primary: #1e293b;
+  --grid-bg-secondary: #334155;
+  --grid-text-primary: #f1f5f9;
+  --grid-text-secondary: #cbd5e1;
+  --grid-text-muted: #94a3b8;
+  --grid-accent: #10b981;
+  --grid-border: #475569;
+  --grid-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Grid principal - SOLO 3 COLUMNAS */
 .producto-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -5,21 +31,26 @@
   padding: 1rem 0;
 }
 
+/* Estados de carga */
 .producto-grid-loading {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 3rem;
-  color: #6b7280;
+  color: var(--grid-text-secondary);
   grid-column: 1 / -1;
+  background: var(--grid-bg-primary);
+  border-radius: 12px;
+  border: 1px solid var(--grid-border);
+  box-shadow: var(--grid-shadow);
 }
 
 .loading-spinner {
   width: 40px;
   height: 40px;
-  border: 4px solid #f3f4f6;
-  border-top: 4px solid #059669;
+  border: 4px solid var(--grid-bg-secondary);
+  border-top: 4px solid var(--grid-accent);
   border-radius: 50%;
   animation: spin 1s linear infinite;
   margin-bottom: 1rem;
@@ -30,16 +61,20 @@
   100% { transform: rotate(360deg); }
 }
 
+/* Estado vacío */
 .producto-grid-empty {
   text-align: center;
   padding: 3rem;
-  color: #6b7280;
+  color: var(--grid-text-secondary);
   font-size: 1.125rem;
   grid-column: 1 / -1;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  background: var(--grid-bg-primary);
+  border-radius: 12px;
+  border: 1px solid var(--grid-border);
+  box-shadow: var(--grid-shadow);
 }
+
+/* === RESPONSIVE DESIGN SIMPLIFICADO === */
 
 /* Tablet */
 @media (max-width: 1024px) {
@@ -66,5 +101,25 @@
 @media (max-width: 480px) {
   .producto-grid {
     gap: 0.875rem;
+  }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner {
+    animation: none;
+  }
+}
+
+/* Modo oscuro del sistema */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light-theme) .producto-grid-container {
+    --grid-bg-primary: #1e293b;
+    --grid-bg-secondary: #334155;
+    --grid-text-primary: #f1f5f9;
+    --grid-text-secondary: #cbd5e1;
+    --grid-text-muted: #94a3b8;
+    --grid-accent: #10b981;
+    --grid-border: #475569;
   }
 }

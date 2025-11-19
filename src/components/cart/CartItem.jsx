@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useCart } from '../../context/CartContext';
 import './css/cartItem.css';
 
 const CartItem = ({ item }) => {
   const { updateQuantity, removeFromCart } = useCart();
+  const [quantity, setQuantity] = useState(item.cantidad);
 
   const handleQuantityChange = (newQuantity) => {
     if (newQuantity < 1) return;
@@ -11,65 +12,66 @@ const CartItem = ({ item }) => {
       alert(`Solo hay ${item.stock} unidades disponibles`);
       return;
     }
-    updateQuantity(item.producto_id, newQuantity);
+
+    try {
+      updateQuantity(item.producto_id, newQuantity);
+      setQuantity(newQuantity);
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   const handleRemove = () => {
-    removeFromCart(item.producto_id);
+    if (window.confirm('¿Estás seguro de eliminar este producto del carrito?')) {
+      removeFromCart(item.producto_id);
+    }
   };
 
   const subtotal = item.precio_unitario * item.cantidad;
 
   return (
     <div className="cart-item">
-      <div className="cart-item-image">
-        <img 
-          src={item.imagen || '/placeholder-beer.png'} 
-          alt={item.nombre}
-          onError={(e) => {
-            e.target.src = '/placeholder-beer.png';
-          }}
-        />
-      </div>
-      
-      <div className="cart-item-details">
-        <h3 className="cart-item-name">{item.nombre}</h3>
-        <p className="cart-item-price">Bs. {item.precio_unitario.toFixed(2)}</p>
-        <p className="cart-item-stock">Stock disponible: {item.stock}</p>
+      <div className="item-image">
+        {item.imagen ? (
+          <img src={item.imagen} alt={item.nombre} />
+        ) : (
+          <div className="no-image">🍷</div>
+        )}
       </div>
 
-      <div className="cart-item-controls">
+      <div className="item-details">
+        <h3 className="item-name">{item.nombre}</h3>
+        <p className="item-price">Bs. {item.precio_unitario.toFixed(2)}</p>
+        <p className="item-stock">Stock disponible: {item.stock}</p>
+      </div>
+
+      <div className="item-controls">
         <div className="quantity-controls">
           <button
-            type="button"
-            onClick={() => handleQuantityChange(item.cantidad - 1)}
-            disabled={item.cantidad <= 1}
+            onClick={() => handleQuantityChange(quantity - 1)}
             className="quantity-btn"
+            disabled={quantity <= 1}
           >
             -
           </button>
-          
-          <span className="quantity-display">{item.cantidad}</span>
-          
+          <span className="quantity">{quantity}</span>
           <button
-            type="button"
-            onClick={() => handleQuantityChange(item.cantidad + 1)}
-            disabled={item.cantidad >= item.stock}
+            onClick={() => handleQuantityChange(quantity + 1)}
             className="quantity-btn"
+            disabled={quantity >= item.stock}
           >
             +
           </button>
         </div>
 
-        <div className="cart-item-subtotal">
+        <div className="item-subtotal">
           Bs. {subtotal.toFixed(2)}
         </div>
 
         <button
-          type="button"
           onClick={handleRemove}
           className="remove-btn"
-          aria-label="Eliminar producto"
+          title="Eliminar producto"
         >
           🗑️
         </button>

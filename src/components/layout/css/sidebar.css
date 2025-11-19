@@ -1,0 +1,39 @@
+/* Sidebar Dark Mode Styles */
+.sidebar-dark {
+  background: #1f2937;
+}
+
+.sidebar-dark .nav-item {
+  color: #d1d5db;
+}
+
+.sidebar-dark .nav-item:hover {
+  background: #374151;
+  color: #ffffff;
+}
+
+.sidebar-dark .nav-item.active {
+  background: #3b82f6;
+  color: #ffffff;
+}
+
+.sidebar-dark .sidebar-header {
+  border-bottom-color: #374151;
+}
+
+.sidebar-dark .sidebar-footer {
+  border-top-color: #374151;
+}
+
+.sidebar-dark .user-name {
+  color: #f9fafb;
+}
+
+.sidebar-dark .user-role {
+  color: #9ca3af;
+}
+
+/* Overlay para modo oscuro */
+.sidebar-overlay.dark-mode {
+  background: rgba(0, 0, 0, 0.8);
+}

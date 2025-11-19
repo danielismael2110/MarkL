@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { useCart } from '../../context/CartContext'; // Cambiar esta línea
+import { useCart } from '../../context/CartContext';
+import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../lib/supabaseClient';
 import './css/productoDetail.css';
 
 const ProductoDetail = ({ producto, onClose }) => {
-  const { addToCart } = useCart(); // Usar useCart en lugar de CartContext
+  const { addToCart } = useCart();
+  const navigate = useNavigate();
   const [cantidad, setCantidad] = useState(1);
   const [adding, setAdding] = useState(false);
 
@@ -18,11 +21,20 @@ const ProductoDetail = ({ producto, onClose }) => {
       return;
     }
 
+    // Verificar si el usuario está autenticado
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    if (!session) {
+      // Redirección directa al login sin mensaje
+      navigate('/login');
+      return;
+    }
+
     setAdding(true);
     
     try {
       await addToCart(producto, cantidad);
-      alert('Producto añadido al carrito');
+      // Producto añadido silenciosamente, sin alert
       // Opcional: cerrar el modal después de añadir
       // onClose();
     } catch (error) {

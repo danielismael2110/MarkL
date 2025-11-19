@@ -1,10 +1,150 @@
+/* Variables CSS para temas */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --text-primary: #1e293b;
+  --text-secondary: #475569;
+  --border-color: #e2e8f0;
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.dark-theme {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --border-color: #334155;
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos base del layout */
 .layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
 }
 
-.layout-main {
+/* Contenido principal */
+.main-content {
   flex: 1;
-  padding-top: 80px; /* Ajusta según la altura de tu navbar */
+  width: 100%;
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease;
+}
+
+/* Estilos globales para aplicar el tema a todos los componentes hijos */
+.layout * {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Scrollbar personalizado para modo oscuro */
+.dark-theme ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark-theme ::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 4px;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Asegurar que las imágenes mantengan su contraste en modo oscuro */
+.dark-theme img {
+  filter: brightness(0.9);
+}
+
+/* Mejorar la legibilidad de los textos en modo oscuro */
+.dark-theme {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Transiciones suaves para todos los estados */
+.layout a,
+.layout button,
+.layout input,
+.layout select,
+.layout textarea {
+  transition: all 0.3s ease;
+}
+
+/* Estados de focus mejorados para accesibilidad */
+.dark-theme .main-content :focus {
+  outline: 2px solid #fbbf24;
+  outline-offset: 2px;
+}
+
+/* Contenedores generales */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Utilidades de espaciado consistentes */
+.section-padding {
+  padding: 3rem 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 2rem 0;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* Clases de utilidad para temas */
+.text-theme-primary {
+  color: var(--text-primary);
+}
+
+.text-theme-secondary {
+  color: var(--text-secondary);
+}
+
+.bg-theme-primary {
+  background-color: var(--bg-primary);
+}
+
+.bg-theme-secondary {
+  background-color: var(--bg-secondary);
+}
+
+.border-theme {
+  border-color: var(--border-color);
+}
+
+/* Estados de carga y transiciones */
+.loading-state {
+  background: linear-gradient(
+    90deg,
+    var(--bg-secondary) 25%,
+    var(--border-color) 50%,
+    var(--bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }

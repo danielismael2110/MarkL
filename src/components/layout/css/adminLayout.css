@@ -1,0 +1,383 @@
+/* Admin Layout Styles */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+  transition: all 0.3s ease;
+}
+
+/* Modo oscuro para todo el layout */
+.admin-layout.dark-mode {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 280px;
+  background: white;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  position: fixed;
+  height: 100vh;
+  z-index: 50;
+  transform: translateX(-100%);
+}
+
+.admin-layout.dark-mode .sidebar {
+  background: #1e293b;
+  border-right: 1px solid #334155;
+  color: #e2e8f0;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-layout.dark-mode .sidebar-header {
+  border-bottom: 1px solid #334155;
+}
+
+.sidebar-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.admin-layout.dark-mode .sidebar-header h2 {
+  color: #f1f5f9;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+}
+
+.admin-layout.dark-mode .close-btn {
+  color: #94a3b8;
+}
+
+.close-btn:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.admin-layout.dark-mode .close-btn:hover {
+  background: #334155;
+  color: #e2e8f0;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  color: #6b7280;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.admin-layout.dark-mode .nav-item {
+  color: #94a3b8;
+}
+
+.nav-item:hover {
+  background: #f8fafc;
+  color: #374151;
+  border-left-color: #d1d5db;
+}
+
+.admin-layout.dark-mode .nav-item:hover {
+  background: #334155;
+  color: #e2e8f0;
+  border-left-color: #475569;
+}
+
+.nav-item.active {
+  background: #eff6ff;
+  color: #1d4ed8;
+  border-left-color: #1d4ed8;
+  font-weight: 600;
+}
+
+.admin-layout.dark-mode .nav-item.active {
+  background: #1e3a8a;
+  color: #60a5fa;
+  border-left-color: #60a5fa;
+}
+
+.nav-icon {
+  font-size: 1.125rem;
+  width: 24px;
+  text-align: center;
+}
+
+.nav-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.admin-layout.dark-mode .sidebar-footer {
+  border-top: 1px solid #334155;
+}
+
+.user-info {
+  margin-bottom: 1rem;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0 0 0.25rem 0;
+  font-size: 0.875rem;
+}
+
+.admin-layout.dark-mode .user-name {
+  color: #f1f5f9;
+}
+
+.user-role {
+  color: #6b7280;
+  margin: 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-layout.dark-mode .user-role {
+  color: #94a3b8;
+}
+
+.logout-btn {
+  width: 100%;
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+/* Main Content */
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0;
+  min-height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+
+/* Admin Header */
+.admin-header {
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.admin-layout.dark-mode .admin-header {
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
+  color: #e2e8f0;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-layout.dark-mode .menu-btn {
+  color: #94a3b8;
+}
+
+.menu-btn:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.admin-layout.dark-mode .menu-btn:hover {
+  background: #334155;
+  color: #e2e8f0;
+}
+
+.header-title {
+  flex: 1;
+}
+
+.header-title h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.admin-layout.dark-mode .header-title h1 {
+  color: #f1f5f9;
+}
+
+.back-to-store {
+  background: #059669;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back-to-store:hover {
+  background: #047857;
+}
+
+/* Admin Content */
+.admin-content {
+  flex: 1;
+  padding: 1.5rem;
+  background: #f8fafc;
+  transition: background 0.3s ease;
+}
+
+.admin-layout.dark-mode .admin-content {
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+  display: none;
+}
+
+/* Responsive Design */
+@media (min-width: 1024px) {
+  .sidebar {
+    position: static;
+    transform: translateX(0);
+    height: auto;
+  }
+  
+  .admin-main {
+    margin-left: 0;
+  }
+  
+  .close-btn {
+    display: none;
+  }
+  
+  .menu-btn {
+    display: none;
+  }
+  
+  .sidebar-overlay {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .sidebar-overlay {
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-header {
+    padding: 1rem;
+  }
+  
+  .admin-content {
+    padding: 1rem;
+  }
+  
+  .header-title h1 {
+    font-size: 1.25rem;
+  }
+  
+  .back-to-store {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+  }
+  
+  .admin-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .header-actions {
+    width: 100%;
+    order: 3;
+  }
+  
+  .back-to-store {
+    width: 100%;
+    justify-content: center;
+  }
+}

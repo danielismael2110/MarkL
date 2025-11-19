@@ -1,38 +1,58 @@
-/* src/components/ui/css/loadingSpinner.css */
-.loading-spinner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-}
-
-.loading-spinner.small {
-  padding: 20px;
-}
-
-.loading-spinner.large {
-  padding: 60px;
-}
-
 .spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #667eea;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-circle {
+  border: 2px solid transparent;
+  border-top: 2px solid;
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
-.loading-spinner.small .spinner {
-  width: 20px;
-  height: 20px;
-  border-width: 2px;
+/* Sizes */
+.spinner-sm {
+  width: 1rem;
+  height: 1rem;
 }
 
-.loading-spinner.large .spinner {
-  width: 60px;
-  height: 60px;
-  border-width: 6px;
+.spinner-sm .spinner-circle {
+  width: 1rem;
+  height: 1rem;
+}
+
+.spinner-md {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.spinner-md .spinner-circle {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.spinner-lg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.spinner-lg .spinner-circle {
+  width: 2rem;
+  height: 2rem;
+}
+
+/* Colors */
+.spinner-primary {
+  color: #3b82f6;
+}
+
+.spinner-white {
+  color: white;
+}
+
+.spinner-gray {
+  color: #6b7280;
 }
 
 @keyframes spin {

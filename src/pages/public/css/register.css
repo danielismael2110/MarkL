@@ -1,117 +1,408 @@
+/* Variables CSS para temas */
+:root {
+  /* TEMA CLARO (por defecto) */
+  --register-bg: #ffffff;
+  --register-border-color: #059669;
+  --register-text-primary: #1e293b;
+  --register-text-secondary: #475569;
+  --register-accent: #059669;
+  --register-input-bg: radial-gradient(47.3% 73.08% at 50% 94.23%, rgba(5, 150, 105, 0.05) 5%, rgba(255, 255, 255, 0) 100%);
+  --register-gradient: linear-gradient(#059669, #047857);
+  --register-button-bg: radial-gradient(100% 45% at 100% 50%, rgba(5, 150, 105, 0.08) 0%, rgba(255, 255, 255, 0) 100%), radial-gradient(100% 45% at 0% 50%, rgba(5, 150, 105, 0.08) 0%, rgba(255, 255, 255, 0) 100%);
+  --register-error-bg: rgba(239, 68, 68, 0.08);
+  --register-error-border: rgba(239, 68, 68, 0.3);
+  --register-texture-color: rgba(5, 150, 105, 0.1);
+}
+
+/* Tema oscuro */
+.dark-theme {
+  --register-bg: #0f172a;
+  --register-border-color: #10b981;
+  --register-text-primary: #f1f5f9;
+  --register-text-secondary: #cbd5e1;
+  --register-accent: #10b981;
+  --register-input-bg: radial-gradient(47.3% 73.08% at 50% 94.23%, rgba(16, 185, 129, 0.1) 5%, rgba(15, 23, 42, 0) 100%);
+  --register-gradient: linear-gradient(#10b981, #059669);
+  --register-button-bg: radial-gradient(100% 45% at 100% 50%, rgba(16, 185, 129, 0.084) 0%, rgba(15, 23, 42, 0) 100%), radial-gradient(100% 45% at 0% 50%, rgba(16, 185, 129, 0.084) 0%, rgba(15, 23, 42, 0) 100%);
+  --register-error-bg: rgba(239, 68, 68, 0.15);
+  --register-error-border: rgba(239, 68, 68, 0.4);
+  --register-texture-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Contenedor principal */
 .register-container {
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
-  background: linear-gradient(135deg, #fef3c7 0%, #fed7aa 100%);
-}
-
-.register-card {
-  background: white;
-  padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 450px;
-  border: 1px solid #fef3c7;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  background: var(--register-bg);
+  position: relative;
+  z-index: 0;
+  transition: background 0.3s ease;
+  padding: 2rem 1rem;
 }
 
-.register-card h2 {
+/* Formulario con diseño moderno */
+.register-form-wrapper {
+  padding: 2.5rem 3rem;
+  display: grid;
+  place-items: center;
+  gap: 2rem;
+  border: 1px solid transparent;
+  border-image: linear-gradient(transparent, var(--register-border-color), transparent) 1;
+  border-width: 0 2px 0px 2px;
+  background: 
+    radial-gradient(100% 61.73% at 100% 50%, color-mix(in srgb, var(--register-accent) 5%, transparent) 0%, transparent 100%),
+    radial-gradient(91.09% 56.23% at 0% 50%, color-mix(in srgb, var(--register-accent) 5%, transparent) 0%, transparent 100%);
+  position: relative;
+  min-width: 450px;
+  max-width: 500px;
+  backdrop-filter: blur(10px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.dark-theme .register-form-wrapper {
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.register-form-wrapper::before,
+.register-form-wrapper::after {
+  content: "";
+  position: absolute;
+  border: 1px solid transparent;
+  border-image: inherit;
+  z-index: -1;
+}
+
+.register-form-wrapper::before {
+  inset: -1rem;
+  opacity: 30%;
+}
+
+.register-form-wrapper::after {
+  inset: -2rem;
+  opacity: 15%;
+}
+
+/* Título */
+.register-title {
+  color: var(--register-text-primary);
+  font-size: 2rem;
+  font-weight: 700;
   text-align: center;
-  margin-bottom: 2rem;
-  color: #92400e;
-  font-size: 1.875rem;
-  font-weight: bold;
+  letter-spacing: 0.6rem;
+  text-transform: uppercase;
+  background: var(--register-gradient);
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.error-message {
-  background: #fef2f2;
-  color: #dc2626;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  margin-bottom: 1.5rem;
+.register-subtitle {
+  color: var(--register-text-secondary);
+  font-size: 0.9rem;
   text-align: center;
-  border: 1px solid #fecaca;
-  font-size: 0.875rem;
+  margin: 0 0 1rem 0;
+  font-weight: 400;
 }
 
-.register-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
+/* Contenedores de input */
 .form-group {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
 .form-group label {
-  margin-bottom: 0.5rem;
+  color: var(--register-text-secondary);
+  font-size: 0.8rem;
   font-weight: 600;
-  color: #374151;
-  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  margin-left: 0.5rem;
 }
 
-.form-group input,
-.form-group textarea {
-  padding: 0.75rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 1rem;
+.input-container {
+  display: flex;
+  align-items: center;
+  background: var(--register-input-bg);
+  border: 1px solid transparent;
+  border-image: radial-gradient(circle, color-mix(in srgb, var(--register-border-color) 30%, transparent) 0%, transparent 100%) 1;
+  border-width: 0 0 1px 0;
   transition: all 0.3s ease;
-  resize: vertical;
-  font-family: inherit;
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+.input-container::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--register-accent);
+  transition: width 0.3s ease;
+}
+
+.input-container:focus-within::before {
+  width: 100%;
+}
+
+.input-container svg {
+  stroke: var(--register-text-secondary);
+  margin-left: 1rem;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.input-container .register-input,
+.input-container .register-textarea {
+  background: none;
+  border: none;
+  padding: 1rem;
+  color: var(--register-text-primary);
+  width: 100%;
+  font-size: 0.95rem;
+  font-weight: 500;
+  resize: vertical;
+  min-height: 44px;
+}
+
+.input-container .register-textarea {
+  min-height: 80px;
+  padding: 1rem;
+  line-height: 1.5;
+}
+
+.input-container .register-input::placeholder,
+.input-container .register-textarea::placeholder {
+  color: var(--register-text-secondary);
+  opacity: 0.6;
+  font-weight: 400;
+}
+
+.input-container .register-input:focus,
+.input-container .register-textarea:focus {
   outline: none;
-  border-color: #f59e0b;
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+  color: var(--register-text-primary);
+}
+
+.input-container:focus-within {
+  background: radial-gradient(47.3% 73.08% at 50% 94.23%, color-mix(in srgb, var(--register-accent) 8%, transparent) 5%, transparent 100%);
+}
+
+.input-container:focus-within svg {
+  stroke: var(--register-accent);
+}
+
+/* Botón de registro */
+.register-button-container {
+  width: 100%;
+  position: relative;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
 }
 
 .register-button {
-  background: #059669;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
   cursor: pointer;
-  margin-top: 0.5rem;
-  transition: background-color 0.3s ease;
-}
-
-.register-button:hover:not(:disabled) {
-  background: #047857;
+  padding: 1.125rem;
+  width: 100%;
+  background: var(--register-button-bg);
+  border: 1px solid transparent;
+  border-image: linear-gradient(transparent, var(--register-accent), transparent) 1;
+  border-width: 0 1px 0 1px;
+  text-align: center;
+  color: var(--register-accent);
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .register-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none !important;
 }
 
+.register-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--register-accent) 15%, transparent), transparent);
+  transition: left 0.6s ease;
+}
+
+.register-button:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.register-button-container:hover:not(:has(.register-button:disabled)) {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 5px 15px color-mix(in srgb, var(--register-accent) 20%, transparent));
+}
+
+.register-button-container:active:not(:has(.register-button:disabled)) {
+  transform: translateY(0px);
+}
+
+/* Enlaces */
 .register-links {
   text-align: center;
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #f3f4f6;
+  margin-top: 1.5rem;
+  width: 100%;
 }
 
 .register-links p {
-  margin-bottom: 0.5rem;
-  color: #6b7280;
+  margin: 0.75rem 0;
+  color: var(--register-text-secondary);
+  font-size: 0.9rem;
 }
 
 .register-links a {
-  color: #d97706;
+  color: var(--register-accent);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.register-links a::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--register-accent);
+  transition: width 0.3s ease;
 }
 
 .register-links a:hover {
-  text-decoration: underline;
+  color: var(--register-accent);
+}
+
+.register-links a:hover::after {
+  width: 100%;
+}
+
+/* Mensaje de error */
+.error-message {
+  background: var(--register-error-bg);
+  border: 1px solid var(--register-error-border);
+  color: #dc2626;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  width: 100%;
+  font-weight: 500;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  margin-bottom: 1rem;
+}
+
+/* Textura animada */
+.register-texture {
+  position: absolute;
+  background-image: linear-gradient(0deg, var(--register-texture-color) 1px, transparent 1px);
+  background-size: 1px 4px;
+  inset: 0;
+  mix-blend-mode: multiply;
+  -webkit-mask-image: radial-gradient(30% 45% at 100% 50%, white 0%, transparent 100%), radial-gradient(30% 45% at 0% 50%, white 0%, transparent 100%);
+  mask-image: radial-gradient(30% 45% at 100% 50%, white 0%, transparent 100%), radial-gradient(30% 45% at 0% 50%, white 0%, transparent 100%);
+  pointer-events: none;
+  animation: movingLines 1s linear infinite;
+}
+
+.dark-theme .register-texture {
+  mix-blend-mode: screen;
+}
+
+/* Animaciones */
+@keyframes movingLines {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 4px; }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .register-form-wrapper {
+    padding: 2rem 1.5rem;
+    min-width: 320px;
+    gap: 1.5rem;
+    margin: 0.5rem;
+  }
+  
+  .register-title {
+    font-size: 1.6rem;
+    letter-spacing: 0.3rem;
+  }
+  
+  .register-subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .input-container .register-input,
+  .input-container .register-textarea {
+    padding: 0.875rem;
+    font-size: 0.9rem;
+  }
+  
+  .register-button {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  .form-group label {
+    font-size: 0.75rem;
+  }
+}
+
+/* Efectos de carga */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.register-button:disabled {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* Grid para formularios más largos */
+.register-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.register-form::-webkit-scrollbar {
+  width: 4px;
+}
+
+.register-form::-webkit-scrollbar-track {
+  background: var(--register-input-bg);
+}
+
+.register-form::-webkit-scrollbar-thumb {
+  background: var(--register-border-color);
+  border-radius: 2px;
 }

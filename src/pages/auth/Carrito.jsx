@@ -1,13 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '../../context/CartContext';
+import { useTheme } from '../../context/ThemeContext';
 import CartItem from '../../components/cart/CartItem';
 import CheckoutForm from '../../components/cart/CheckoutForm';
 import './css/carrito.css';
 
 const Carrito = () => {
   const { items, subtotal, iva, total, itemCount, clearCart } = useCart();
+  const { darkMode } = useTheme();
   const [showCheckout, setShowCheckout] = useState(false);
   const [orderSuccess, setOrderSuccess] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Aplicar tema oscuro (dos métodos de compatibilidad)
+  useEffect(() => {
+    const root = document.documentElement;
+    const container = document.querySelector('.carrito-container');
+    
+    if (darkMode) {
+      root.setAttribute('data-theme', 'dark');
+      container?.classList.add('dark-mode');
+    } else {
+      root.removeAttribute('data-theme');
+      container?.classList.remove('dark-mode');
+    }
+  }, [darkMode]);
+
+  // Simular carga inicial
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleCheckout = () => {
     setShowCheckout(true);
@@ -16,6 +41,7 @@ const Carrito = () => {
   const handleCheckoutSuccess = (pedido) => {
     setOrderSuccess(pedido);
     setShowCheckout(false);
+    clearCart();
   };
 
   const handleCheckoutCancel = () => {
@@ -24,7 +50,16 @@ const Carrito = () => {
 
   const handleContinueShopping = () => {
     setOrderSuccess(null);
+    window.location.href = '/productos';
   };
+
+  if (isLoading) {
+    return (
+      <div className="carrito-container">
+        <div className="loading">Cargando carrito...</div>
+      </div>
+    );
+  }
 
   if (orderSuccess) {
     return (
@@ -33,11 +68,16 @@ const Carrito = () => {
           <div className="success-icon">✅</div>
           <h1>¡Pedido Realizado con Éxito!</h1>
           <p>Tu pedido <strong>{orderSuccess.numero_pedido}</strong> ha sido procesado correctamente.</p>
-          <p>Total: <strong>Bs. {orderSuccess.total.toFixed(2)}</strong></p>
+          <p>Total: <strong>Bs. {orderSuccess.total?.toFixed(2)}</strong></p>
           <p>Te contactaremos pronto para coordinar la entrega.</p>
-          <button onClick={handleContinueShopping} className="continue-btn">
-            Seguir Comprando
-          </button>
+          <div className="success-actions">
+            <button onClick={handleContinueShopping} className="continue-btn">
+              Seguir Comprando
+            </button>
+            <a href="/mis-pedidos" className="view-orders-btn">
+              Ver Mis Pedidos
+            </a>
+          </div>
         </div>
       </div>
     );

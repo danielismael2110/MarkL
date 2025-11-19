@@ -3,6 +3,7 @@ import { productsService } from '../../services/supabase/products';
 import ProductoGrid from '../../components/products/ProductoGrid';
 import CategoriasFilter from '../../components/products/CategoriasFilter';
 import ProductoDetail from '../../components/products/ProductoDetail';
+import { Search, X } from 'lucide-react';
 import './css/productosPublic.css';
 
 const ProductosPublic = () => {
@@ -55,6 +56,7 @@ const ProductosPublic = () => {
       const productosData = await productsService.getAllProducts();
       console.log('Todos los productos:', productosData);
       setProductos(productosData);
+      setSearchQuery('');
     } catch (error) {
       console.error('Error cargando productos:', error);
     } finally {
@@ -69,6 +71,7 @@ const ProductosPublic = () => {
       const productosData = await productsService.getProductsByCategory(categoriaSeleccionada);
       console.log('Productos por categoría:', productosData);
       setProductos(productosData);
+      setSearchQuery('');
     } catch (error) {
       console.error('Error cargando productos por categoría:', error);
     } finally {
@@ -87,11 +90,17 @@ const ProductosPublic = () => {
       setLoading(true);
       const resultados = await productsService.searchProducts(searchQuery);
       setProductos(resultados);
+      setCategoriaSeleccionada(null);
     } catch (error) {
       console.error('Error buscando productos:', error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+    cargarTodosLosProductos();
   };
 
   const handleViewDetails = (producto) => {
@@ -102,21 +111,39 @@ const ProductosPublic = () => {
     setProductoSeleccionado(null);
   };
 
+  const handleClearCategory = () => {
+    setCategoriaSeleccionada(null);
+    setSearchQuery('');
+  };
+
   return (
     <div className="productos-public-container">
       <div className="productos-header">
         <h1>Nuestros Productos</h1>
-        <p>Descubre nuestra selección de licores y bebidas</p>
+        <p>Descubre nuestra selección exclusiva de licores y bebidas premium</p>
         
         <form onSubmit={handleSearch} className="search-form">
-          <input
-            type="text"
-            placeholder="Buscar productos..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
-          />
+          <div className="search-input-container">
+            <Search className="search-icon" />
+            <input
+              type="text"
+              placeholder="      Buscar productos por nombre..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
+            {searchQuery && (
+              <button 
+                type="button" 
+                onClick={handleClearSearch}
+                className="clear-search-btn"
+              >
+                <X size={16} />
+              </button>
+            )}
+          </div>
           <button type="submit" className="search-btn">
+            <Search size={18} />
             Buscar
           </button>
           <button 
@@ -141,13 +168,31 @@ const ProductosPublic = () => {
 
         <main className="productos-main">
           <div className="productos-stats">
-            <p>{productos.length} productos encontrados</p>
-            {categoriaSeleccionada && (
+            <div className="stats-info">
+              <span className="productos-count">{productos.length}</span>
+              <span>productos encontrados</span>
+              {(categoriaSeleccionada || searchQuery) && (
+                <div className="active-filters">
+                  {categoriaSeleccionada && (
+                    <span className="filter-tag">
+                      Categoría: {categorias.find(c => c.id === categoriaSeleccionada)?.nombre}
+                    </span>
+                  )}
+                  {searchQuery && (
+                    <span className="filter-tag">
+                      Búsqueda: "{searchQuery}"
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+            {(categoriaSeleccionada || searchQuery) && (
               <button 
-                onClick={() => setCategoriaSeleccionada(null)}
+                onClick={handleClearCategory}
                 className="clear-filter-btn"
               >
-                Limpiar filtro
+                <X size={16} />
+                Limpiar filtros
               </button>
             )}
           </div>

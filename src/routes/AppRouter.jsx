@@ -4,10 +4,20 @@ import Home from '../pages/public/Home'
 import Login from '../pages/public/Login'
 import Register from '../pages/public/Register'
 import ProductosPublic from '../pages/public/ProductosPublic'
-import Dashboard from '../pages/auth/Dashboard'
+
 import Perfil from '../pages/auth/Perfil'
 import Carrito from '../pages/auth/Carrito'
+import MisPedidos from '../pages/auth/MisPedidos'
 import ProtectedRoute from '../components/auth/ProtectedRoute'
+import RoleRoute from '../components/auth/RoleRoute'
+import AdminDashboard from '../pages/admin/AdminDashboard'
+import Productos from '../pages/admin/Productos'
+import Pedidos from '../pages/admin/Pedidos'
+import Ventas from '../pages/admin/Ventas'
+import Usuarios from '../pages/admin/Usuarios'
+import Inventario from '../pages/admin/Inventario'
+import Categorias from '../pages/admin/Categorias'
+import Proveedores from '../pages/admin/Proveedores'
 
 const AppRouter = () => {
   const { loading } = useAuth()
@@ -31,11 +41,24 @@ const AppRouter = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/productos" element={<ProductosPublic />} />
 
-      {/* Rutas protegidas */}
+      {/* Rutas protegidas para clientes */}
       <Route element={<ProtectedRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
+        
         <Route path="/perfil" element={<Perfil />} />
         <Route path="/carrito" element={<Carrito />} />
+        <Route path="/mis-pedidos" element={<MisPedidos />} />
+      </Route>
+
+      {/* Rutas de administración */}
+      <Route path="/admin" element={<RoleRoute allowedRoles={['admin', 'cajero']} />}>
+        <Route index element={<AdminDashboard />} />
+        <Route path="productos" element={<Productos />} />
+        <Route path="pedidos" element={<Pedidos />} />
+        <Route path="ventas" element={<Ventas />} />
+        <Route path="inventario" element={<Inventario />} />
+        <Route path="/admin/categorias" element={<Categorias />} />
+  <Route path="/admin/proveedores" element={<Proveedores />} />
+        <Route path="usuarios" element={<Usuarios />} />
       </Route>
 
       {/* Ruta 404 */}
@@ -50,11 +73,6 @@ const AppRouter = () => {
           </div>
         </div>
       } />
-      <Route path="/carrito" element={
-  <ProtectedRoute>
-    <Carrito />
-  </ProtectedRoute>
-} />
     </Routes>
   )
 }

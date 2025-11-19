@@ -1,0 +1,648 @@
+/* Variables CSS para temas */
+:root {
+  /* TEMA CLARO (por defecto) */
+  --dashboard-bg: #f8fafc;
+  --dashboard-card-bg: #ffffff;
+  --dashboard-text-primary: #1e293b;
+  --dashboard-text-secondary: #475569;
+  --dashboard-text-muted: #64748b;
+  --dashboard-accent: #059669;
+  --dashboard-border: #e2e8f0;
+  --dashboard-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --dashboard-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+  
+  /* Colores de estado */
+  --status-pending: #f59e0b;
+  --status-confirmed: #3b82f6;
+  --status-shipped: #8b5cf6;
+  --status-delivered: #10b981;
+  --status-cancelled: #ef4444;
+  
+  /* Colores de íconos */
+  --icon-blue: #3b82f6;
+  --icon-green: #10b981;
+  --icon-purple: #8b5cf6;
+  --icon-yellow: #f59e0b;
+  --icon-indigo: #6366f1;
+  --icon-red: #ef4444;
+}
+
+/* Tema oscuro - USANDO LA MISMA CLASE QUE useTheme */
+.dark-mode {
+  --dashboard-bg: #0f172a;
+  --dashboard-card-bg: #1e293b;
+  --dashboard-text-primary: #f1f5f9;
+  --dashboard-text-secondary: #cbd5e1;
+  --dashboard-text-muted: #94a3b8;
+  --dashboard-accent: #10b981;
+  --dashboard-border: #334155;
+  --dashboard-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --dashboard-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.3);
+  
+  /* Colores de estado (más vibrantes en oscuro) */
+  --status-pending: #f59e0b;
+  --status-confirmed: #60a5fa;
+  --status-shipped: #a78bfa;
+  --status-delivered: #34d399;
+  --status-cancelled: #f87171;
+}
+
+/* Contenedor principal */
+.dashboard {
+  padding: 1.5rem;
+  background: var(--dashboard-bg);
+  min-height: 100vh;
+  transition: background 0.3s ease;
+}
+
+/* Tarjeta de bienvenida */
+.welcome-card {
+  background: linear-gradient(135deg, var(--dashboard-accent), color-mix(in srgb, var(--dashboard-accent) 70%, #000));
+  color: white;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--dashboard-shadow-lg);
+}
+
+.welcome-content h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.welcome-subtitle {
+  opacity: 0.9;
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.welcome-stats {
+  display: flex;
+  align-items: center;
+}
+
+.stat-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  backdrop-filter: blur(10px);
+}
+
+/* Grid de estadísticas */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: var(--dashboard-card-bg);
+  border: 1px solid var(--dashboard-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--dashboard-shadow);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--dashboard-shadow-lg);
+  border-color: var(--dashboard-accent);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--dashboard-accent);
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  background: color-mix(in srgb, var(--icon-blue) 15%, transparent);
+}
+
+.stat-card:nth-child(2) .stat-icon {
+  background: color-mix(in srgb, var(--icon-green) 15%, transparent);
+}
+
+.stat-card:nth-child(3) .stat-icon {
+  background: color-mix(in srgb, var(--icon-purple) 15%, transparent);
+}
+
+.stat-card:nth-child(4) .stat-icon {
+  background: color-mix(in srgb, var(--icon-yellow) 15%, transparent);
+}
+
+.stat-card:nth-child(5) .stat-icon {
+  background: color-mix(in srgb, var(--icon-indigo) 15%, transparent);
+}
+
+.stat-card:nth-child(6) .stat-icon {
+  background: color-mix(in srgb, var(--icon-red) 15%, transparent);
+}
+
+.stat-info {
+  margin-bottom: 1rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--dashboard-text-primary);
+  margin: 0 0 0.25rem 0;
+  line-height: 1;
+}
+
+.stat-label {
+  color: var(--dashboard-text-secondary);
+  font-weight: 600;
+  margin: 0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-link {
+  color: var(--dashboard-accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stat-link:hover {
+  gap: 0.5rem;
+}
+
+/* Grid del dashboard */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard-card {
+  background: var(--dashboard-card-bg);
+  border: 1px solid var(--dashboard-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--dashboard-shadow);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--dashboard-border);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dashboard-text-primary);
+  margin: 0;
+}
+
+.view-all-link {
+  color: var(--dashboard-accent);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.view-all-link:hover {
+  text-decoration: underline;
+}
+
+/* Lista de pedidos */
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--dashboard-border) 10%, transparent);
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.order-item:hover {
+  background: color-mix(in srgb, var(--dashboard-border) 20%, transparent);
+  transform: translateX(4px);
+}
+
+.order-info {
+  flex: 1;
+}
+
+.order-number {
+  font-weight: 700;
+  color: var(--dashboard-text-primary);
+  margin: 0 0 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.order-customer {
+  color: var(--dashboard-text-secondary);
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.order-details {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.status-badge {
+  padding: 0.375rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge.pendiente {
+  background: color-mix(in srgb, var(--status-pending) 15%, transparent);
+  color: var(--status-pending);
+  border: 1px solid color-mix(in srgb, var(--status-pending) 30%, transparent);
+}
+
+.status-badge.confirmado {
+  background: color-mix(in srgb, var(--status-confirmed) 15%, transparent);
+  color: var(--status-confirmed);
+  border: 1px solid color-mix(in srgb, var(--status-confirmed) 30%, transparent);
+}
+
+.status-badge.enviado {
+  background: color-mix(in srgb, var(--status-shipped) 15%, transparent);
+  color: var(--status-shipped);
+  border: 1px solid color-mix(in srgb, var(--status-shipped) 30%, transparent);
+}
+
+.status-badge.entregado {
+  background: color-mix(in srgb, var(--status-delivered) 15%, transparent);
+  color: var(--status-delivered);
+  border: 1px solid color-mix(in srgb, var(--status-delivered) 30%, transparent);
+}
+
+.status-badge.cancelado {
+  background: color-mix(in srgb, var(--status-cancelled) 15%, transparent);
+  color: var(--status-cancelled);
+  border: 1px solid color-mix(in srgb, var(--status-cancelled) 30%, transparent);
+}
+
+.order-total {
+  font-weight: 700;
+  color: var(--dashboard-text-primary);
+  font-size: 1rem;
+}
+
+/* Lista de stock bajo */
+.stock-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--dashboard-border) 10%, transparent);
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.stock-item:hover {
+  background: color-mix(in srgb, var(--dashboard-border) 20%, transparent);
+  transform: translateX(4px);
+}
+
+.product-info {
+  flex: 1;
+}
+
+.product-name {
+  font-weight: 600;
+  color: var(--dashboard-text-primary);
+  margin: 0 0 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.product-category {
+  color: var(--dashboard-text-secondary);
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.stock-level {
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Acciones rápidas */
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.quick-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: color-mix(in srgb, var(--dashboard-accent) 5%, transparent);
+  border: 2px solid color-mix(in srgb, var(--dashboard-accent) 20%, transparent);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.quick-action:hover {
+  background: color-mix(in srgb, var(--dashboard-accent) 10%, transparent);
+  border-color: var(--dashboard-accent);
+  transform: translateY(-2px);
+}
+
+.action-icon {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.action-text {
+  color: var(--dashboard-text-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Estados vacíos */
+.text-gray-500 {
+  color: var(--dashboard-text-muted) !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.space-y-3 > * + * {
+  margin-top: 0.75rem;
+}
+
+/* Clases de utilidad para colores en modo oscuro */
+.dark-mode .text-yellow-600 {
+  color: #f59e0b !important;
+}
+
+.dark-mode .text-red-600 {
+  color: #f87171 !important;
+}
+
+.dark-mode .text-gray-500 {
+  color: #94a3b8 !important;
+}
+
+/* Clases de utilidad para flexbox */
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.h-64 {
+  height: 16rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+/* Corrección para las clases de colores que usas en el componente */
+.dark-mode .bg-yellow-100 {
+  background-color: color-mix(in srgb, var(--status-pending) 15%, transparent) !important;
+}
+
+.dark-mode .text-yellow-800 {
+  color: var(--status-pending) !important;
+}
+
+.dark-mode .bg-blue-100 {
+  background-color: color-mix(in srgb, var(--status-confirmed) 15%, transparent) !important;
+}
+
+.dark-mode .text-blue-800 {
+  color: var(--status-confirmed) !important;
+}
+
+.dark-mode .bg-purple-100 {
+  background-color: color-mix(in srgb, var(--status-shipped) 15%, transparent) !important;
+}
+
+.dark-mode .text-purple-800 {
+  color: var(--status-shipped) !important;
+}
+
+.dark-mode .bg-green-100 {
+  background-color: color-mix(in srgb, var(--status-delivered) 15%, transparent) !important;
+}
+
+.dark-mode .text-green-800 {
+  color: var(--status-delivered) !important;
+}
+
+.dark-mode .bg-red-100 {
+  background-color: color-mix(in srgb, var(--status-cancelled) 15%, transparent) !important;
+}
+
+.dark-mode .text-red-800 {
+  color: var(--status-cancelled) !important;
+}
+
+/* === RESPONSIVE DESIGN === */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  .welcome-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 1rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .quick-actions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .welcome-content h1 {
+    font-size: 1.5rem;
+  }
+  
+  .welcome-subtitle {
+    font-size: 1rem;
+  }
+  
+  .stat-card {
+    padding: 1.25rem;
+  }
+  
+  .dashboard-card {
+    padding: 1.25rem;
+  }
+  
+  .order-item,
+  .stock-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  
+  .order-details {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Mobile pequeño */
+@media (max-width: 480px) {
+  .dashboard {
+    padding: 0.75rem;
+  }
+  
+  .quick-actions-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stat-value {
+    font-size: 1.75rem;
+  }
+  
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .view-all-link {
+    align-self: flex-end;
+  }
+  
+  .welcome-card {
+    padding: 1.25rem;
+  }
+  
+  .stat-badge {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Pantallas grandes */
+@media (min-width: 1440px) {
+  .dashboard {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .stat-card,
+  .order-item,
+  .stock-item,
+  .quick-action {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* Focus visible */
+.stat-link:focus-visible,
+.view-all-link:focus-visible,
+.quick-action:focus-visible {
+  outline: 2px solid var(--dashboard-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Loading states */
+.loading-spinner {
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid var(--dashboard-accent);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
